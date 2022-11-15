@@ -1,0 +1,48 @@
+%!TEX root = ../dokumentation.tex
+
+
+\addchap{\langabkverz}
+%nur verwendete Akronyme werden letztlich im Abkürzungsverzeichnis des Dokuments angezeigt
+%Verwendung: 
+%		\ac{Abk.}   --> fügt die Abkürzung ein, beim ersten Aufruf wird zusätzlich automatisch die ausgeschriebene Version davor eingefügt bzw. in einer Fußnote (hierfür muss in header.tex \usepackage[printonlyused,footnote]{acronym} stehen) dargestellt
+%		\acs{Abk.}   -->  fügt die Abkürzung ein
+%		\acf{Abk.}   --> fügt die Abkürzung UND die Erklärung ein
+%		\acl{Abk.}   --> fügt nur die Erklärung ein
+%		\acp{Abk.}  --> gibt Plural aus (angefügtes 's'); das zusätzliche 'p' funktioniert auch bei obigen Befehlen
+%	siehe auch: http://golatex.de/wiki/%5Cacronym
+%	
+\begin{acronym}[mmmmm] %[YTMMM]
+% \setlength{\itemsep}{-\parsep}
+
+\acro{DBFZ}{DBFZ Deutsches Biomasseforschungszentrum gemeinnützige GmbH}
+\acro{VPN}{Virtual Private Network}
+\acro{VM}{Virtuelle Maschine}
+\acro{IP}{Internet Protocol (auch übertr. Internet Protocol Address)}
+\acro{BMEL}{Bundesministerium für Ernährung und Landwirtschaft}
+\acro{API}{Application Programming Interface}
+\acro{npm}{Node Package Manager}
+\acro{SSH}{Secure Shell}
+\acro{SCP}{Secure Copy}
+\acro{CPU}{Central Processing Unit}
+\acro{I/O}{Input/Output}
+\acro{RDP}{Remote Desktop Protocol}
+\acro{TCP}{Transmission Control Protocol}
+\acro{LTS}{Long Term Support}
+\acro{pip}{Keine Abkürzung. Paketmanager für Python.}
+\acro{pypi}{Python Package Index (pypi.org)}
+\acro{CI/CD}{Continuous Integration, Continuous Delivery/Deployment}
+\acro{IDE}{Integrated Development Environment}
+
+
+
+
+\acro{AGPL}{Affero GNU General Public License}
+\acro{WSN}{Wireless Sensor Network}
+\acro{MANET}{Mobile wireless Ad-hoc NETwork}
+\acro{MAC}{Multiple Access Control}
+\acro{QoS}{Quality of Service}
+\acro{DSR}{Dynamic Source Routing}
+\acro{API}{Application Programming Interface}
+\acro{WYSIWYG}{What You See Is What You Get}
+\acro{HTML}{HyperText Markup Language}
+\end{acronym}
