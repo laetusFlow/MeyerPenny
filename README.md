@@ -1,2 +1,2 @@
 # MeyerPenny
-A paper playing with quantum coins
+A paper toying with quantum coins
