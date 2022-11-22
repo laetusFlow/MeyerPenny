@@ -2,12 +2,12 @@
 Hier könnte eine Einleitung stehen
 
 \chapter{Quantencomputing als Konzept}
+Quantencomputing ist, grundsätzlich gesehen, Informationsverarbeitung mittels quantenmechanischer Systeme \cite[NielsenChuang]{1}.
+
 \section{Unterschied Bit -- Qubit}
 
 \section{Aufgabe 2}
 \section{Aufgabe 3}
-
-
 \chapter{Das Meyer-Penny-Spiel}
 Was ist damit gemeint?
 
@@ -23,3 +23,27 @@ Hier steht was rauskommt
 
 \chapter{Schluss}
 Sind diese Quanten eigentlich radioaktiv?
+\chapter{(Mitschrieb in Vorlesung)}
+\begin{itemize}
+\item Zustände: Superposition von Zuständen
+\item Für mehrere Zustände dind die Zustände diskret
+\item Eine Messung liefert genau einen der möglichen Zustände
+\item Mehrere Messungen liefern unterschiedliche konkrete Zustände. Um den Zustand $\ket{i}$ zu messen: $\left\lvert \alpha_i \right\rvert ^2 \rightarrow \sum_{i = 0}^{n} \left\lvert \alpha_i \right\rvert ^2 = 1$
+\item Man kann die realen Messungen auf einem klassischen Recher mit Zufallszahlen simulieren.
+$Z=\alpha\ket{0}+\beta\ket{1}$ mit $\alpha + \beta = 1$
+\item Zustände werden bei der Messung zerstört.
+\item Rechnen mit QBits: \\
+$$
+\ket{\varPsi} = \alpha\ket{0}\beta\ket{1}
+$$
+Operation O:
+$$
+O \ket{\varPsi} = \alpha'\ket{0}\beta'\ket{1}
+$$
+$\ket{0},\ket{1}$ sind abstrakte Symbole:
+$$
+\ket{0}\rightarrow \begin{pmatrix}
+    1 \\ 0
+\end{pmatrix}
+$$
+\end{itemize}
