@@ -2,9 +2,51 @@
 Hier könnte eine Einleitung stehen
 
 \chapter{Quantencomputing als Konzept}
-Quantencomputing ist, grundsätzlich gesehen, Informationsverarbeitung mittels quantenmechanischer Systeme \cite[NielsenChuang]{1}.
+Quantencomputing ist, grundsätzlich gesehen, Informationsverarbeitung mittels quantenmechanischer Systeme \cite[1]{NielsenChuang}.
+Diese Technologie ermöglicht es, gewisse Berechnungen vielfach schneller und effizienter als auf herkömmlichen, \textit{klassischen} Computern vorzunehmen. Dabei wird ein grundlegendes Konzept der Quantenmechanik nutzbar gemacht, die \textit{Superposition} -- der Umstand, dass in einem Quantensystem ein Zustand erst im Rahmen der Beobachtung determinitert wird, davor jedoch verschiedene Zustände sich zugleich überlagern können. 
 
-\section{Unterschied Bit -- Qubit}
+
+\section{Unterschied Bit -- Qbit}
+Dieses Konzept der \textit{Superposition} wird im Quantencomputing dergestalt angewandt, dass die grundlegende atomare Einheit des Quantencomputings nicht, wie im Digitalrechner, das Bit ist, sondern das sogenannte \textit{QBit} (Quantenbit).
+Auch dies ist ein binäres System, jedoch jeweils erst ab der Messung.
+Vor der Messung kann ein Qbit eine unendliche Zahl an Zuständen zwischen den möglichen Messzuständen $0$ und $1$ einnehmen.
+Mathematisch werden diese \glqq Möglichkeiten\grqq{} durch Vorfaktoren (üblicherweise $\alpha$ und $\beta$) ausgedrückt:
+
+\begin{align}
+&\alpha \cdot \ket{0}+\beta \cdot \ket{1} \label{qbitdef} \\
+&\text{wobei}\notag \\ 
+&\left\lvert \alpha \right\rvert ^2 + \left\lvert \beta \right\rvert ^2 = 1 & \{ \alpha, \beta \} \in \mathbb{C}
+\end{align}
+$\alpha$ und $\beta$ werden hierbei als \textit{Amplituden} des QBits (\ref{qbitdef}) bezeichnet.
+Die Amplituden bilden gemeinsam mit der Superposition $\ket{0}+\ket{1}$ einen Vektorraum, der Zustandsvektor $(\alpha, \beta)$
+\begin{align}
+    \begin{pmatrix}
+        \alpha\\
+        \beta
+    \end{pmatrix}.
+\end{align}
+ist die Linearkombination der zweidimensionalen Standardbasisvektoren\cite[22]{Homeister}:
+
+\begin{align}
+    \left(\begin{array}{c}
+        \alpha\\
+        \beta
+    \end{array}\right) 
+    =
+    \alpha \left(\begin{array}{c}
+        1\\
+        0   
+    \end{array}\right) 
+    +
+    \beta \left(\begin{array}{c}
+        0\\
+        1   
+    \end{array}\right) 
+    =
+    \alpha \cdot \ket{0}+\beta \cdot \ket{1}.
+\end{align}
+
+
 
 \section{Aufgabe 2}
 \section{Aufgabe 3}
