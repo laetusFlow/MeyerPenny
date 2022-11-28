@@ -90,3 +90,63 @@ $$
 \end{pmatrix}
 $$
 \end{itemize}
+
+\section{Welche Eigenschaften sind für die QC-Simulation wichtig?}
+\begin{itemize}
+    \item Wk- Eigenschaft $\Longleftrightarrow$ Zufallszahlen
+    \item Darstellung der Operation auf QO
+    \item Darstellung der QO
+    \item beides Vektoren, Matrizen.
+    \item Einschränkungen? Beispiel:
+\end{itemize}
+$$
+n=3 \text{ Qbits; } R_0 = \ket{000}
+$$
+$$
+H\ket{0}=\frac{1}{\sqrt{2} } \left(\ket{0}+\ket{1}\right) \\
+$$
+$$
+H\ket{000}=\frac{1}{\sqrt{2} }\cdot \left(\ket{0}+\ket{1}\right)\cdot \left(\ket{0}+\ket{1}\right)\cdot \left(\ket{0}+\ket{1}\right)
+$$
+$$
+=\frac{1}{\sqrt{8} }\cdot \left(\ket{000}+\ket{001}+\ket{010}+\ket{011}+\ket{100}+\ket{101}+\ket{110}+\ket{111}\right)
+$$
+Hadamard ausführlich:
+$$
+n=2; \ket{g_1, g_2}
+$$
+$$
+\begin{align}
+    H = \frac{1}{\sqrt{2}}
+    \begin{pmatrix}
+        1 & 1\\
+        1 & -1\\
+    \end{pmatrix}
+\end{align}
+$$
+$$
+\begin{align}
+    H = \frac{1}{\sqrt{2}}
+    \begin{pmatrix}
+        \begin{pmatrix}
+            1 & 1\\
+            1 & -1\\
+        \end{pmatrix}
+        & 
+        \begin{pmatrix}
+            1 & 1\\
+            1 & -1\\
+        \end{pmatrix}
+        \\
+        \begin{pmatrix}
+            1 & 1\\
+            1 & -1\\
+        \end{pmatrix}
+        & 
+        (-1)\begin{pmatrix}
+            1 & 1\\
+            1 & -1\\
+        \end{pmatrix}
+    \end{pmatrix}
+\end{align}
+$$
