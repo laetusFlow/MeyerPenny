@@ -1,4 +1,5 @@
-% \renewcommand*{\arraystretch}{1.0} % Matrix vertical Spacing
+%!TEX root = ./dokumentation.tex
+\renewcommand*{\arraystretch}{1.0} % Matrix vertical Spacing
 % \usetikzlibrary{quantikz}
 
 \chapter{Einleitung}
@@ -67,13 +68,13 @@ Hier steht was rauskommt
 \section{Mathematischer Hintergrund}
 Alle Gatteroperationen von Quantengattern sind im Grunde Matrixmultiplikationen.
 
-% \begin{quantikz}
-% \lstick{$\ket{1}$} & \gate{H} & \ctrl{1} & \gate{U} & \
-% ctrl{1} & \swap{2} & \ctrl{1} & \qw \\
-% \lstick{$\ket{0}$} & \gate{H} & \targ{} & \octrl{-1} & \
-% control{} & \qw & \octrl{1} & \qw \\
-% &&&&&\targX{} & \gate{U} & \qw
-% \end{quantikz}
+\begin{quantikz}
+\lstick{$\ket{1}$} & \gate{H} & \ctrl{1} & \gate{U} & \
+ctrl{1} & \swap{2} & \ctrl{1} & \qw \\
+\lstick{$\ket{0}$} & \gate{H} & \targ{} & \octrl{-1} & \
+control{} & \qw & \octrl{1} & \qw \\
+&&&&&\targX{} & \gate{U} & \qw
+\end{quantikz}
 
 \chapter{Schluss}
 Sind diese Quanten eigentlich radioaktiv?
