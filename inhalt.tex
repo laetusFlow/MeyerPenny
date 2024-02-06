@@ -1,13 +1,14 @@
-%!TEX root = ./dokumentation.tex
+%!TEX root = ./dokumentnation.tex
 \renewcommand*{\arraystretch}{1.0} % Matrix vertical Spacing
 % \usetikzlibrary{quantikz}
 
-\chapter{Einleitung}
-Hier könnte eine Einleitung stehen
+% \chapter{Einleitung}
+% Hier könnte eine Einleitung stehen
 
 \chapter{Quantencomputing als Konzept}
+% \section{Quantencomputing als Konzept}
 Quantencomputing ist, grundsätzlich gesehen, Informationsverarbeitung mittels quantenmechanischer Systeme \cite[1]{NielsenChuang}.
-Diese Technologie ermöglicht es, gewisse Berechnungen vielfach schneller und effizienter als auf herkömmlichen, \textit{klassischen} Computern vorzunehmen. Dabei wird ein grundlegendes Konzept der Quantenmechanik nutzbar gemacht, die \textit{Superposition} -- der Umstand, dass in einem Quantensystem ein Zustand erst im Rahmen der Beobachtung determinitert wird, davor jedoch verschiedene Zustände sich zugleich überlagern können. 
+Diese Technologie ermöglicht es, gewisse Berechnungen vielfach schneller und effizienter als auf herkömmlichen, \textit{klassischen} Computern vorzunehmen. Dabei wird ein grundlegendes Konzept der Quantenmechanik nutzbar gemacht, die \textit{Superposition} -- der Umstand, dass in einem Quantensystem ein Zustand erst im Rahmen der Beobachtung determiniert wird, davor jedoch verschiedene Zustände sich zugleich überlagern können.
 
 
 \section{Unterschied Bit -- Qbit}
@@ -20,7 +21,9 @@ Mathematisch werden diese \glqq Möglichkeiten\grqq{} durch Vorfaktoren (üblich
 &\text{wobei}\notag \\ 
 &\left\lvert \alpha \right\rvert ^2 + \left\lvert \beta \right\rvert ^2 = 1 & \{ \alpha, \beta \} \in \mathbb{C}
 \end{align}
-$\alpha$ und $\beta$ werden hierbei als \textit{Amplituden} des QBits (\ref{qbitdef}) bezeichnet.
+$\alpha$ und $\beta$ werden hierbei als \textit{Amplituden} des QBits 
+(\ref{qbitdef})
+bezeichnet.
 Die Amplituden bilden gemeinsam mit der Superposition $\ket{0}+\ket{1}$ einen Vektorraum, der Zustandsvektor $(\alpha, \beta)$
 \begin{align}
     \begin{pmatrix}
@@ -28,7 +31,7 @@ Die Amplituden bilden gemeinsam mit der Superposition $\ket{0}+\ket{1}$ einen Ve
         \beta
     \end{pmatrix}
 \end{align}
-ist die Linearkombination der zweidimensionalen Standardbasisvektoren\cite[22]{Homeister}:
+ist die Linearkombination der zweidimensionalen Standardbasisvektoren\cite[22]{Homeister}: 
 
 \begin{align}
     \left(\begin{array}{c}
@@ -46,119 +49,369 @@ ist die Linearkombination der zweidimensionalen Standardbasisvektoren\cite[22]{H
         1   
     \end{array}\right) 
     =
-    \alpha \cdot \ket{0}+\beta \cdot \ket{1}.
+    \alpha \cdot \ket{0}+\beta \cdot \ket{1}
 \end{align}
 
+% Aufgabe 3
+\chapter{Aufgabe 3}
+% \section{Aufgabe 3}
+\section{Grundlagen}
+Als Beispiel sei ein QBit mit diesen Amplituden angenommen:
+\begin{align}
+q=\sqrt{\frac{1}{3}} \ket{0}-\sqrt{\frac{2}{3}} \ket{1} \label{qbitexamp}
+\end{align}
+Die Wahrscheinlichkeiten, nach einer Messung $0$ oder $1$ zu erhalten, ergeben sich aus:
+\begin{alignat}{2}
+\mathcal{P}(q_0) & = \left( \left\lvert \sqrt{\frac{1}{3}} \right\rvert \right) ^2 & = \frac{1}{3}\\
+\mathcal{P}(q_1) & = \left( \left\lvert - \sqrt{\frac{2}{3}} \right\rvert \right)^2 & = \frac{2}{3}
+\end{alignat}
 
+\section{Transformationsmatrix}
+Im Programmcode zu dieser Arbeit ist dieses QBit mittels der Methode \texttt{Aufgaben.aufgabe1()} und der dort verwendeten \texttt{Qbit}-Klasse verwirklicht.
+Das gesamte Programm ist in \texttt{Java} geschrieben.
+Bewusst wurde auf die Verwendung eines Quantencomputing-Frameworks wie \texttt{qiskit} verzichtet, um die tatsächlichen mathematischen Gatteroperationen nachzuvollziehen.
+Die Amplituden $\alpha=\sqrt{\frac{1}{3}}$ und $\beta=-\sqrt{\frac{2}{3}}$ wurden nicht vorgegeben \textit{(hardgecodet)}, sondern zu Übungszwecken selbst durch Matrixmanipulation erzeugt.
+(Nachteilig an diesem Ansatz ist, dass bei keiner der implementierten Quantenoperationen ein tatsächliches Testen an echten Quantencomputern möglich ist, bei dem man auch die erwartbare Fehlerquote der Operationen hätte beobachten können.)
 
-\section{Aufgabe 2}
-\section{Aufgabe 3}
+Der Initialzustand eines neuen QBits aus der \texttt{Qbit}-Klasse entspricht $1\ket{0}+0\ket{1}$, dies wird im Konstruktor \texttt{Qbit.Qbit()} festgelegt.
+Ist das Ziel, eine Matrix zu finden, die die gewünschten $\alpha$- und $\beta$-Werte erzeugen, dann gilt: 
+\begin{align}
+    \begin{pmatrix}
+        a & b \\
+        c & d
+    \end{pmatrix}
+    \begin{pmatrix}
+       1  \\
+       0 
+    \end{pmatrix}
+    &=
+    \begin{pmatrix}
+       \sqrt{\frac{1}{3}} \label{abcdempty} \\
+       -\sqrt{\frac{2}{3}} 
+    \end{pmatrix} \\
+    \notag \\
+    \text{mit}\notag \\
+    a &= \sqrt{\frac{1}{3}} \\
+    c &= -\sqrt{\frac{2}{3}} 
+\end{align}
+Da die gesuchte Matrix unitär sein muss \cite[265]{SutorDancing} gilt:
+\begin{align}
+    a^2 + b^2 &= 1 \\
+    c^2 + c^2 &= 1 \\
+    ac + bd &= 0 \label{abcdzero}
+\end{align}
+
+Durch Einsetzen ergeben sich jeweils 2 Lösungen:
+\begin{align}
+    \left( \sqrt{\frac{1}{3}} \right)^2 + b^2 &= 1 \\
+    b &= \pm \sqrt{\frac{2}{3}} \\
+    \notag\\
+    \left( -\sqrt{\frac{2}{3}} \right)^2 + d^2 &= 1 \\
+    d &= \pm \sqrt{\frac{1}{3}}
+\end{align}
+
+Wähle $b$ und $d$:
+\begin{align}
+    b &= -\sqrt{\frac{2}{3}} \\ 
+    d &= -\sqrt{\frac{1}{3}} \\ 
+\end{align}
+
+Nach Einsetzen in \ref{abcdempty} ergibt via \ref{abcdzero} die gesuchte Matrix: 
+\begin{align}
+    \begin{pmatrix}
+        \sqrt{\frac{1}{3}} & -\sqrt{\frac{2}{3}} \\
+        -\sqrt{\frac{2}{3}} & -\sqrt{\frac{2}{3}} 
+    \end{pmatrix}
+\end{align}
+
+Diese ist tatsächlich unitär:
+
+\begin{alignat}{2}
+    \begin{pmatrix}
+        \sqrt{\frac{1}{3}} & -\sqrt{\frac{2}{3}} \\
+        -\sqrt{\frac{2}{3}} & -\sqrt{\frac{2}{3}} 
+    \end{pmatrix}
+    \begin{pmatrix}
+        \sqrt{\frac{1}{3}} & -\sqrt{\frac{2}{3}} \\
+        -\sqrt{\frac{2}{3}} & -\sqrt{\frac{2}{3}} 
+    \end{pmatrix}
+    &=
+    \begin{pmatrix}
+        \sqrt{\frac{1}{3}}+\sqrt{\frac{2}{3}} & -\sqrt{\frac{2}{9}} + \sqrt{\frac{2}{9}} \\
+        -\sqrt{\frac{2}{9}} - \sqrt{\frac{2}{9}} & \sqrt{\frac{2}{3}} + \sqrt{\frac{1}{3}}  
+    \end{pmatrix}
+    &=
+    \begin{pmatrix}
+        1 & 0 \\
+        0 & 1 
+    \end{pmatrix}
+\end{alignat}
+Die Matrix kann als nichtorthodoxes Quantengatter verstanden werden, welches das gewünschte $\alpha$ und $\beta$ aus dem Initialzustand erzeugt.
+Dieser Vorgang ist im Code via \texttt{Qbit.thirdgate()} umgesetzt.
+
+\section{Messlogik}
+Tatsächlich ergibt eine vielmalige Messung mittels \texttt{Qbit.measure()} eines so simulierten QBits eine ungefähre Aufteilung in $\frac{1}{3}$ mal 0 und $\frac{2}{3}$ mal 1.
+
+\texttt{Qbit.measure()} ist dergestalt implementiert, dass eine Pseudozufallsvariable im Intervall $\left[0,1\right]$ erzeugt wird und durch eine \texttt{if-else}-Verzweigung mit dem Quadrat von $\alpha$ verglichen wird.
+Ist die Zufallszahl kleiner als $\alpha^2$, wird 0 zurückgegeben, dies entspricht dem Messwert des QBits.
+Andernfalls kann durch $\left\lvert \alpha \right\rvert ^2 + \left\lvert \beta \right\rvert ^2 = 1$ vom Messwert 1 ausgegangen werden (\texttt{else}-Zweig).
+
+% \section{Das Meyer-Penny-Spiel}
 \chapter{Das Meyer-Penny-Spiel}
-Was ist damit gemeint?
+% \chapter{Das Meyer-Penny-Spiel}
+\section{Grundlage}
+Das Meyer-Penny-Spiel wurde 1999 als Gedankenexperiment von David A. Meyer vorgestellt, um Auswirkungen gewisser Quantencomputing-Algorithmen auf Bereiche der Spieltheorie zu verdeutlichen \cite{Meyer1999Feb}.
+In vereinfachter Form beschreibt es das geminsame Werfen einer Münze durch zwei Spieler, die jeweils auf ihre Münzseite hoffen.
+Nur einer der beiden Spieler (bei Meyer: \textit{Q}) kann auf die Mittel des Quantencomputings zugreifen, der andere muss sich auf sein Zufallsglück verlassen (bei Meyer: \textit{Picard,} beide aus dem \textit{StarTrek-}Universum).
 
-\section{Code}
-\begin{lstlisting}[caption=Python-Code \texttt{./mybestpython.py}, label=pythoncodebeispiel, language=python]
-print("Hi Mom") 
-# I really dig your mom
-\end{lstlisting}
-Ich glaube, wir brauchen ein Zitat\cite{NielsenChuang}.
+Das Grundprinzip ist einfach beschrieben:
+\textquote{P[icard] is to place a penny, head up, in a box, whereupon they will take turns (Q, then P, then Q) flipping the penny over (or not), without being able to see it. Q wins if the penny is head up when they open the box \cite[1052]{Meyer1999Feb}.}
+Unabhängig von seiner gewählten Spielstrategie (flippen oder nicht) könnte Picard hier auf eine akzeptable Gewinnwahrscheinlichkeit von $\mathcal{P}(P_1) = \frac{1}{2}$ hoffen, während die Gewinnwahrscheinlichkeit Qs bei jeder seiner vier möglichen Strategien bei $\mathcal{P}(Q_1) = 2\cdot \frac{1}{4}$ liegen müsste. 
 
-\section{Programmergebnis}
-Hier steht was rauskommt
-\section{Mathematischer Hintergrund}
-Alle Gatteroperationen von Quantengattern sind im Grunde Matrixmultiplikationen.
+\section{Quantenschaltung}
+Die Besonderheit liegt aber darin, dass Q bei seinen beiden Zügen die Münze weder flippt noch nichtflippt, sondern in den Zustand der Superposition versetzt.
+Das entsprechende Quantengatter ist das \textit{Hadamard-Gate,} der Spielablauf lässt sich in Gattern folgendermaßen ausdrücken:
 
 \begin{quantikz}
-\lstick{$\ket{1}$} & \gate{H} & \ctrl{1} & \gate{U} & \
-ctrl{1} & \swap{2} & \ctrl{1} & \qw \\
-\lstick{$\ket{0}$} & \gate{H} & \targ{} & \octrl{-1} & \
-control{} & \qw & \octrl{1} & \qw \\
-&&&&&\targX{} & \gate{U} & \qw
+\lstick{$0$} & \gate{H} & \meter{} & \cwbend{1} \\
+\lstick{$0$} & \gate{X} & \gate{H}    & \targ{} &\gate{H} & \meter{}
 \end{quantikz}
 
-\chapter{Schluss}
-Sind diese Quanten eigentlich radioaktiv?
-\chapter{(Mitschrieb in Vorlesung)}
-\begin{itemize}
-\item Zustände: Superposition von Zuständen
-\item Für mehrere Zustände sind die Zustände diskret
-\item Eine Messung liefert genau einen der möglichen Zustände
-\item Mehrere Messungen liefern unterschiedliche konkrete Zustände. Um den Zustand $\ket{i}$ zu messen: $\left\lvert \alpha_i \right\rvert ^2 \rightarrow \sum_{i = 0}^{n} \left\lvert \alpha_i \right\rvert ^2 = 1$
-\item Man kann die realen Messungen auf einem klassischen Recher mit Zufallszahlen simulieren.
-$Z=\alpha\ket{0}+\beta\ket{1}$ mit $\alpha + \beta = 1$
-\item Zustände werden bei der Messung zerstört.
-\item Rechnen mit QBits: \\
-$$
-\ket{\varPsi} = \alpha\ket{0}\beta\ket{1}
-$$
-Operation O:
-$$
-O \ket{\varPsi} = \alpha'\ket{0}\beta'\ket{1}
-$$
-$\ket{0},\ket{1}$ sind abstrakte Symbole:
-$$
-\ket{0}\rightarrow \begin{pmatrix}
-    1 \\ 0
-\end{pmatrix}
-$$
-\end{itemize}
+Das obere QBit repräsentiert schlicht Picards Entscheidung, die hier der Einfachheit ebenfalls als zufällig angenommen wird und durch ein Hadamard-Gate repräsentiert wird, dass sofort ausgelesen wird und den Zustand 0 oder 1 an das zweite QBit übergibt. 
+Diesem zweiten QBit entspricht die eigentliche Münzflipp-Aktion.
+Das X-Gate setzt das Qbit auf 1, bevor es im ersten Hadamard-Gate in Superposition gebracht wird.
+Die dann folgende Eingabe von Picards Entscheidung via CNOT ist für das Endergebnis tatsächlich irrelevant, denn nach dem anschließenden Hadamard-Gate wird das QBit immer jenen Zustand messen lassen, den es zuvor beim X-Gate hatte.
 
-\section{Welche Eigenschaften sind für die QC-Simulation wichtig?}
-\begin{itemize}
-    \item Wk- Eigenschaft $\Longleftrightarrow$ Zufallszahlen
-    \item Darstellung der Operation auf QO
-    \item Darstellung der QO
-    \item beides Vektoren, Matrizen.
-    \item Einschränkungen? Beispiel:
-\end{itemize}
-$$
-n=3 \text{ Qbits; } R_0 = \ket{000}
-$$
-$$
-H\ket{0}=\frac{1}{\sqrt{2} } \left(\ket{0}+\ket{1}\right) \\
-$$
-$$
-H\ket{000}=\frac{1}{\sqrt{2} }\cdot \left(\ket{0}+\ket{1}\right)\cdot \left(\ket{0}+\ket{1}\right)\cdot \left(\ket{0}+\ket{1}\right)
-$$
-$$
-=\frac{1}{\sqrt{8} }\cdot \left(\ket{000}+\ket{001}+\ket{010}+\ket{011}+\ket{100}+\ket{101}+\ket{110}+\ket{111}\right)
-$$
-Hadamard ausführlich:
-$$
-n=2; \ket{g_1, g_2}
-$$
-$$
+Die Schaltung lässt sich vereinfachen, wenn man das erste QBit durch eine Fallunterscheidung ersetzt.
+Wenn Picard sich entscheidet, die Münze zu flippen, dann wird statt des CNOT-Gates ein X-Gate angewandt, ansonsten wird es ausgelassen:
+
+\begin{quantikz}
+\lstick{Fall 1: Picard flippt:} & \gate{X} & \gate{H} & \gate{X} & \gate{H} & \meter{}\\
+\lstick{Fall 2: Picard flippt nicht:} & \gate{X} & \gate{H} & \qw{} &\gate{H} & \meter{}
+\end{quantikz}
+
+\pagebreak[4]
+\section{Mathematische Operationen}
+In dieser Schaltung werden nur noch zwei verschiedene Gatter verwendet:
 \begin{align}
-    H = \frac{1}{\sqrt{2}}
+    H &= \frac{1}{\sqrt{2}}
     \begin{pmatrix}
-        1 & 1\\
-        1 & -1\\
+        1 & 1 \\
+        1 & -1
+    \end{pmatrix} \\
+    X &= 
+    \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+    \end{pmatrix} 
+\end{align}
+
+Die Matrixmultiplikation im Fall 1 ist damit (Multiplikation von rechts nach links, ganz rechts der Eingangsvektor des QBits):
+\begin{align}
+    \frac{1}{\sqrt{2}}
+    \begin{pmatrix}
+        1 & 1 \\
+        1 & -1
+    \end{pmatrix}
+    \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+    \end{pmatrix} 
+    \frac{1}{\sqrt{2}}
+    \begin{pmatrix}
+        1 & 1 \\
+        1 & -1
+    \end{pmatrix}
+    \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+    \end{pmatrix} 
+    &\begin{pmatrix}
+        1 \\
+        0
+    \end{pmatrix} \\
+    =
+    \frac{1}{2}
+    \begin{pmatrix}
+        1 & 1 \\
+        1 & -1
+    \end{pmatrix}
+    \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+    \end{pmatrix} 
+    \begin{pmatrix}
+        1 & 1 \\
+        1 & -1
+    \end{pmatrix}
+    \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+    \end{pmatrix} 
+    &\begin{pmatrix}
+        1 \\
+        0
+    \end{pmatrix} \\
+    =
+    \frac{1}{2}
+    \begin{pmatrix}
+        1 & 1 \\
+        1 & -1
+    \end{pmatrix}
+    \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+    \end{pmatrix} 
+    \begin{pmatrix}
+        1 & 1 \\
+        1 & -1
+    \end{pmatrix}
+    &\begin{pmatrix}
+        0 \\
+        1
+    \end{pmatrix} \\
+    =
+    \frac{1}{2}
+    \begin{pmatrix}
+        1 & 1 \\
+        1 & -1
+    \end{pmatrix}
+    \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+    \end{pmatrix} 
+    &\begin{pmatrix}
+        1 \\
+        -1
+    \end{pmatrix} \\
+    =
+    \frac{1}{2}
+    \begin{pmatrix}
+        1 & 1 \\
+        1 & -1
+    \end{pmatrix}
+    &\begin{pmatrix}
+        -1 \\
+        1
+    \end{pmatrix} \\
+    =
+    \frac{1}{2}
+    &\begin{pmatrix}
+        -1 +1 \\
+        -1 -1
+    \end{pmatrix} \\
+    =
+    \frac{1}{2}
+    &\begin{pmatrix}
+        0 \\
+        -2
+    \end{pmatrix} \\
+    =
+    &\begin{pmatrix}
+        0 \\
+        -1
+    \end{pmatrix} \\
+    \notag \\
+    \text{gemessen als} \Longrightarrow 
+    &\begin{pmatrix}
+        0 \\
+        1
+    \end{pmatrix} 
+\end{align}
+
+Verzichtet Picard auf das Flippen, ist die Rechnung kürzer:
+\begin{align}
+    \frac{1}{\sqrt{2}}
+    \begin{pmatrix}
+        1 & 1 \\
+        1 & -1
+    \end{pmatrix}
+    \frac{1}{\sqrt{2}}
+    \begin{pmatrix}
+        1 & 1 \\
+        1 & -1
+    \end{pmatrix}
+    \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+    \end{pmatrix} 
+    &\begin{pmatrix}
+        1 \\
+        0
+    \end{pmatrix} \\
+    =
+    \frac{1}{2}
+    \begin{pmatrix}
+        1 & 1 \\
+        1 & -1
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 & 1 \\
+        1 & -1
+    \end{pmatrix}
+    \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+    \end{pmatrix} 
+    &\begin{pmatrix}
+        1 \\
+        0
+    \end{pmatrix} \\
+    =
+    \frac{1}{2}
+    \begin{pmatrix}
+        1 & 1 \\
+        1 & -1
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 & 1 \\
+        1 & -1
+    \end{pmatrix}
+    &\begin{pmatrix}
+        0 \\
+        1
+    \end{pmatrix} \\
+    =
+    \frac{1}{2}
+    \begin{pmatrix}
+        1 & 1 \\
+        1 & -1
+    \end{pmatrix}
+    &\begin{pmatrix}
+        1 \\
+        -1
+    \end{pmatrix} \\
+    =
+    \frac{1}{2}
+    &\begin{pmatrix}
+        0 \\
+        2
+    \end{pmatrix} \\
+    =
+    &\begin{pmatrix}
+        0 \\
+        1
     \end{pmatrix}
 \end{align}
-$$
-$$
-\begin{align}
-    H = \frac{1}{\sqrt{2}}
-    \begin{pmatrix}
-        \begin{pmatrix}
-            1 & 1\\
-            1 & -1\\
-        \end{pmatrix}
-        & 
-        \begin{pmatrix}
-            1 & 1\\
-            1 & -1\\
-        \end{pmatrix}
-        \\
-        \begin{pmatrix}
-            1 & 1\\
-            1 & -1\\
-        \end{pmatrix}
-        & 
-        (-1)\begin{pmatrix}
-            1 & 1\\
-            1 & -1\\
-        \end{pmatrix}
-    \end{pmatrix}
-\end{align}
-$$
+
+Es zeigt sich, dass, unabhängig von Picards Entscheidung, in jedem der beiden Fälle immer das gleiche Ergebnis folgt.
+Angewandt auf das Gedankenexperiment bedeutet das, dass immer der Kopf nach dem Spiel nach oben zeigen wird und Q immer gewinnen wird.
+
+\section{Implementierung im Programmcode}
+Wie oben bereits erwähnt, wird ein QBit durch Implementierung der \texttt{Qbit}-Klasse im Zustand $\ket{0}$ instanziiert.
+Dort sind auch die verwendbaren Gatter als Methoden angelegt.
+Diese sind der Einfachheit halber nur für reelle Zahlenoperationen verwendbar.
+\texttt{Qbit.flip()} entspricht funktional dem X-Gatter, \texttt{Qbit.hadamardGate()} ist selbsterklärend.
+
+Die Logik des Meyer-Penny-Spiels wird dann in der \texttt{Aufgaben}-Klasse durchgeführt (\texttt{meyer\allowbreak PennySpiel()}).
+Instanziiert werden hier zwei QBits (\texttt{picard} und \texttt{penny}), wobei \texttt{picard} der zufälligen Entscheidung Picards entspricht, ob er die Münze flippt oder nicht, \texttt{penny} entspricht der oben berechneten Spiellogik. 
+Das \texttt{penny}-Qbit wird zunächst geflippt, um es in die Position entsprechend $\ket{1}$ zu bringen.
+Dann wird es mit \texttt{hadamardGate()} in Superposition gebracht.
+Die Logik des CNOT-Gates, das nun folgen würde, wurde auch hier mit einer Fallunterscheidung umgesetzt: 
+Wenn das aus der Superposition herausgemessene \texttt{picard}-QBit einer 1 entspricht, dann wird auf \texttt{penny} eine weitere \texttt{flip()}-Operation angewandt.
+Danach folgt nochmals \texttt{penny.hadamardGate()} und die Münze kann ausgemessen werden.
+Eine 1 wird als \textit{Kopf} interpretiert, eine 0 als \textit{Zahl}.
+Mittels der Zähllogik kann gezeigt werden, dass bei jeder Iteration der \texttt{meyerPennySpiel()}-Methode das Ergebnis \textit{Kopf} erzielt wird.
+
+Quantencomputer gelten als Rechner, die im Gegensatz zu klassischen Computern echte Zufallszahlen erzeugen können. 
+Das Meyer-Penny-Spiel zeigt jedoch, dass nicht immer, wenn Quantencomputer im Spiel sind und eine Zufallsentscheidung vorgeblich getroffen wird, diese auch tatsächlich zufällig sein muss.
